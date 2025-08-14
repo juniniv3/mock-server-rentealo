@@ -1,15 +1,14 @@
-import express from "express";
+import express from 'express'
+import cors from 'cors'
+import { createMiddleware } from '@mswjs/http-middleware'
+import { handlers } from './users-mock'
 
-const app = express();
-const port = 3000; // default port to listen
+const app = express()
+const port = 3000
 
-app.use(express.json());
+app.use(cors())
+app.use(createMiddleware(...handlers))
 
-app.get("/", (_req, res) => {
-  res.send("Hello World!");
-});
-
-// start the Express server
 app.listen(port, () => {
-  console.log(`server started at http://localhost:${port}`);
-});
+  console.log(`Mock server is running at http://localhost:${port}`)
+})
